@@ -1,0 +1,45 @@
+{% extends "bookread/base.html" %}
+{% block title %}个人日记{% endblock %}
+{% block stype %}
+ <link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/main.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+  <div class="con_content">
+    <div class="about_box">
+      <h2 class="nh1"><span>您现在的位置是：<a href="/" target="_blank">网站首页</a>>><a href="#" target="_blank">个人日记</a></span><b>个人日记</b></h2>
+      <div class="dtxw box">
+          {% for one in page_obj %}
+        <li>
+          <div class="dttext f_l">
+            <ul>
+              <h2><a href="/BookRead/xiangxi/{{ one.id }}">{{ one.goods_name }}</a></h2>
+              <p>{{ one.goods_description }}</p>
+              <span>{{ one.goods_pro_time }}</span>
+            </ul>
+          </div>
+          <div class="xwpic f_r"><a href="/BookRead/xiangxi/{{ one.id }}"><img src="/static/{{ one.picture }}"></a></div>
+        </li>
+          {% endfor %}
+      </div>
+      <div class="pagelist">
+{#          <a href="/">首页</a>#}
+{#          <a href="/">上一页</a><a href="/">下一页</a>#}
+{#          <a href="/">尾页</a>#}
+           <a href="/BookRead/newslistpic/1">首页</a>
+          {% if page_obj.has_previous %}
+            <a href="/BookRead/newslistpic/{{ page_obj.previous_page_number }}">上一页</a>
+          {% endif %}
+            {% for page in page_range %}
+                <a href="/BookRead/newslistpic/{{ page }}">{{ page }}</a>
+            {% endfor %}
+          {% if page_obj.has_next %}
+               <a href="/BookRead/newslistpic/{{ page_obj.next_page_number }}">下一页</a>
+          {% endif %}
+            <a href="/BookRead/newslistpic/{{ paginator.num_pages }}">尾页</a>
+      </div>
+    </div>
+  </div>
+  <div class="blank"></div>
+{% endblock %}
+  

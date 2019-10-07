@@ -1,0 +1,52 @@
+{% extends "bookguan/base.html" %}
+{% block first %}
+    <h1>书籍列表
+        <a href="/BookGuan/goods_add">增加书籍</a></h1>
+{% endblock %}
+{% block content %}
+     <table class="table">
+     <thead>
+       <tr>
+           <th>书籍编号</th>
+           <th>书籍名称</th>
+           <th>书籍出版日期</th>
+           <th>书籍作者</th>
+           <th>书籍类型</th>
+           <th>操作</th>
+       </tr>
+    </thead>
+    <tbody>
+       {%  for one in goods_list %}
+    <tr>
+        <th>{{ one.goods_number }}</th>
+        <th>{{ one.goods_name }}</th>
+        <th>{{ one.goods_pro_time }}</th>
+        <th>{{ one.goods_author_name }}</th>
+        <th>{{ one.type_name }}</th>
+        <th>
+            <button class="btn btn-primary">修改</button>
+            {% if one.goods_status == 1 %}
+                <a href="/BookGuan/goods_status/down/{{ one.id }}" type="button" class="btn btn-warning">下架</a>
+            {% else %}
+                <a href="/BookGuan/goods_status/up/{{ one.id }}" type="button" class="btn btn-warning">上架</a>
+            {% endif %}
+        </th>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{#    {{ status }}#}
+    <ul style="float: right; margin-right: 50px" class="pagination">
+      {% for one in goods_all.page_range %}
+          <li class="paginate_button page-item previous">
+          <li class="paginate_button page-item">
+              {% if status == "1" %}
+              <a href="/BookGuan/goods_list/1/{{ one }}" class="page-link">{{ one }}</a>
+              {% else %}
+              <a href="/BookGuan/goods_list/0/{{ one }}" class="page-link">{{ one }}</a>
+              {% endif %}
+          </li>
+       {% endfor %}
+    </ul>
+    </div>
+{% endblock %}
