@@ -140,3 +140,22 @@ def goods_status(request,status,id):
     url=request.META.get("HTTP_REFERER",'/BookGuan/goods_list/1/1/')
     return HttpResponseRedirect(url)
 
+@LoginVaild
+def personal_info(request):
+    user_id = request.COOKIES.get("userid")
+    print (user_id)
+    user =LoginUser.objects.filter(id = user_id).first()
+    if request.method == "POST":
+        ## 获取 数据，保存数据
+        data = request.POST
+        print (data.get("email"))
+        user.username = data.get("username")
+        user.phone_number = data.get("phone_number")
+        user.age = data.get("age")
+        user.gender = data.get("gender")
+        user.address = data.get("address")
+        user.photo = request.FILES.get("photo")
+        user.save()
+        print (data)
+    return render(request,"bookguan/personal_info.html",locals())
+

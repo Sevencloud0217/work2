@@ -37,7 +37,7 @@
         <h3 class="tit">图文推荐</h3>
         <ul>
            {% for tuwen in recommend_acticle %}
-          <li><a href="/"><img src="/static/{{ tuwen.picture }}"><b>{{ tuwen.goods_content }}</b></a>
+          <li><a href="/BookRead/xiangxi/{{ tuwen.id }}"><img src="/static/{{ tuwen.picture }}"><b>{{ tuwen.goods_content }}</b></a>
             <p><span class="tulanmu"><a href="/BookRead/xiangxi/{{ tuwen.id }}">{{ tuwen.goods_name }}</a></span><span class="tutime">{{ tuwen.goods_pro_time }}</span></p>
           </li>
             {% endfor %}
